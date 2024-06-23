@@ -4,7 +4,6 @@ __pycache__/
 *$py.class
 .pytest_cache/
 
-# Flask stuff:
 instance/
 .webassets-cache
 
@@ -15,8 +14,7 @@ instance/
 #   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
 poetry.lock
 
-
 venv/
-ENV/
+.env
 
 
