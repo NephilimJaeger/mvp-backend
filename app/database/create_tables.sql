@@ -16,7 +16,7 @@ CREATE TABLE "professor" (
   "telefone" varchar(11),
   "endereco" varchar,
   "email" varchar,
-  "especialidade" varchar
+  "informacoes_adicionais" varchar
 );
 
 CREATE TABLE "turma" (

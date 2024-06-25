@@ -19,6 +19,7 @@ class Aluno(Pessoa):
 class Professor(Pessoa):
     __tablename__ = 'professores'
     especialidade = Column(String)
+    informacoes_adicionais = Column(String)
 
 class Turma(Base):
     __tablename__ = 'turma'
