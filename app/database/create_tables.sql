@@ -5,13 +5,14 @@ CREATE TABLE "alunos" (
   "cpf"      varchar (11) PRIMARY KEY,
   "telefone" varchar (11),
   "endereco" varchar,
+  "data_nascimento" date,
   "email"    varchar,
   "data_inicio" date
 );
 
 CREATE TABLE "professor" (
-  "cpf" varchar(11) PRIMARY KEY,
   "nome" varchar,
+  "cpf" varchar(11) PRIMARY KEY,
   "telefone" varchar(11),
   "endereco" varchar,
   "email" varchar,

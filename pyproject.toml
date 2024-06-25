@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "mvp-backend"
 version = "0.1.0"
-description = "A system for registering students in a beach tennis school. This system was developed to achieve approval in the fisrt sprint of the Software Engineering Post-Graduation program at PUC-Rio."
+description = "A system for registering students in a beach tennis school. This system was developed to achieve approval in the first sprint of the Software Engineering Post-Graduation program at PUC-Rio."
 authors = ["Nilane Arruda <nyllane16@gmail.com>"]
 readme = "README.md"
 packages = [{include = "mvp_backend"}]
