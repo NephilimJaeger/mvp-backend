@@ -1,7 +1,8 @@
-from base import Base
+from models.base import Base
 from dataclasses import dataclass
 from sqlalchemy import Column
 from sqlalchemy.sql.sqltypes import String
+
 
 @dataclass
 class PessoaInfo:
@@ -10,6 +11,7 @@ class PessoaInfo:
     telefone: str
     endereco: str
     email: str
+
 
 class Pessoa(Base):
     __abstract__ = True

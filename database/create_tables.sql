@@ -1,16 +1,15 @@
 --Criacao das tabelas do banco de dados
 
-CREATE TABLE "alunos" (
+CREATE TABLE IF NOT EXISTS "alunos" (
   "nome"     varchar,
   "cpf"      varchar (11) PRIMARY KEY,
   "telefone" varchar (11),
   "endereco" varchar,
   "data_nascimento" date,
-  "email"    varchar,
-  "data_inicio" date
+  "email"    varchar
 );
 
-CREATE TABLE "professor" (
+CREATE TABLE IF NOT EXISTS "professor" (
   "nome" varchar,
   "cpf" varchar(11) PRIMARY KEY,
   "telefone" varchar(11),
@@ -19,20 +18,21 @@ CREATE TABLE "professor" (
   "informacoes_adicionais" varchar
 );
 
-CREATE TABLE "turma" (
-  "id_turma" integer PRIMARY KEY,
-  "id_professor" varchar (11),
+CREATE TABLE IF NOT EXISTS "turma" (
+  "id_turma" SERIAL PRIMARY KEY,
+  "id_professor" varchar (11) NOT NULL,
   "nivel" varchar,
-  "horário" time,
+  "horario" time,
   "dia_semana" varchar,
   FOREIGN KEY ("id_professor") REFERENCES "professor" ("cpf")
 );
 
-CREATE TABLE "inscricao" (
-  "id_inscricao" varchar PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS "inscricao" (
+  "id_inscricao" uuid PRIMARY KEY DEFAULT gen_random_uuid (),
   "id_aluno" varchar(11),
   "id_turma" integer,
   "data_incricao" date,
   FOREIGN KEY ("id_aluno") REFERENCES "alunos" ("cpf"),
-  FOREIGN KEY ("id_turma") REFERENCES "turma" ("id_turma")
+  FOREIGN KEY ("id_turma") REFERENCES "turma" ("id_turma"),
+  UNIQUE ("id_aluno", "id_turma")
 );
