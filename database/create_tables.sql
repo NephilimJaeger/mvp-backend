@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS "inscricao" (
   "id_inscricao" uuid PRIMARY KEY DEFAULT gen_random_uuid (),
   "id_aluno" varchar(11),
   "id_turma" integer,
-  "data_incricao" date,
+  "data_inscricao" date,
   FOREIGN KEY ("id_aluno") REFERENCES "alunos" ("cpf"),
   FOREIGN KEY ("id_turma") REFERENCES "turma" ("id_turma"),
   UNIQUE ("id_aluno", "id_turma")

@@ -1,9 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from schemas.pessoa import PessoaBase
 from sqlalchemy.orm.session import Session
 from models import Aluno
 from datetime import date
-
 
 class AlunoBase(BaseModel):
     pessoa_info: PessoaBase

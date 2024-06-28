@@ -4,9 +4,12 @@ from sqlalchemy.sql.sqltypes import Date, String
 from datetime import date
 from models.base import Base
 
+
 class Inscricao(Base):
     __tablename__ = "inscricao"
-    id_inscricao = Column(UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid())
+    id_inscricao = Column(
+        UUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid()
+    )
     id_aluno = Column(String, ForeignKey("alunos.cpf"))
     id_turma = Column(String, ForeignKey("turma.id_turma"))
     data_inscricao = Column(Date, default=date.today)

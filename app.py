@@ -33,12 +33,14 @@ def get_turmas():
     return mostra_turmas(turmas, session)
 
 
-@app.post("/matricula", tags=[matricula_tag])
-def matricular_aluno(form: Inscricao):
-    cadastro = cadastra_aluno(form.dados_aluno, session)
-    matricula = matricula_aluno()
-    return cadastro
-
+@app.post(
+    "/matricula",
+    tags=[matricula_tag],
+    responses={"200": InscricaoBase, "409": ErrorSchema, "400": ErrorSchema},
+)
+def matricular_aluno(form: InscricaoBase):
+    matricula = matricula_aluno(form, session)
+    return matricula
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
