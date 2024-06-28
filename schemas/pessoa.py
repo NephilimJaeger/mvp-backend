@@ -7,3 +7,4 @@ class PessoaBase(BaseModel):
     telefone: str
     endereco: str
     email: str
+    data_nascimento: str

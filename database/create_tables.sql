@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS "professor" (
   "telefone" varchar(11),
   "endereco" varchar,
   "email" varchar,
+  "data_nascimento" date,
   "informacoes_adicionais" varchar
 );
 

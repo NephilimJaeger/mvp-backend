@@ -6,11 +6,10 @@ from datetime import date
 
 class AlunoBase(BaseModel):
     pessoa_info: PessoaBase
-    data_nascimento: date
 
 def cadastra_aluno(dados_aluno: AlunoBase, session: Session):
     aluno = Aluno(
-        pessoa_info=dados_aluno.pessoa_info, data_nascimento=dados_aluno.data_nascimento
+        pessoa_info=dados_aluno.pessoa_info 
     )
     session.add(aluno)
     session.commit()
