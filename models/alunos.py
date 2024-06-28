@@ -11,4 +11,3 @@ class Aluno(Pessoa):
         pessoa_info: PessoaInfo,
     ):
         super().__init__(pessoa_info)
-

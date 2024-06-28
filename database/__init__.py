@@ -33,11 +33,3 @@ db_init(engine)
 connection = connect_to_db(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
-
-
-# stmt = select(Aluno.nome)
-
-# with session as sess:
-#     result = sess.execute(stmt)
-#     for aluno in result:
-#         print(aluno[0])

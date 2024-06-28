@@ -14,6 +14,7 @@ class PessoaInfo:
     email: str
     data_nascimento: date
 
+
 class Pessoa(Base):
     __abstract__ = True
     nome = Column(String)
