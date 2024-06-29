@@ -15,7 +15,7 @@ INSERT INTO turma (id_professor, nivel, horario, dia_semana) VALUES ('3645712390
 
 -- Inserindo dados na tabela de alunos
 
-INSERT INTO alunos (nome, cpf, telefone, endereco, data_nascimento, email) VALUES ('Amanda Julia Barbosa', '01737421014', '17984526514', 'Rua das Camélias, 213 - Jardins','2000-02-21','amanda.julia@gmail.com')
+INSERT INTO alunos (nome, cpf, telefone, endereco, data_nascimento, email) VALUES ('Amanda Julia Barbosa', '01737421014', '17984526514', 'Rua das Camélias, 213 - Jardins','2000-02-21','amanda.julia@gmail.com');
 
 -- Inserindo dados na tabela de matriculas
 

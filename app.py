@@ -1,4 +1,4 @@
-from flask_openapi3 import OpenAPI, Info, Tag, PathItem
+from flask_openapi3 import OpenAPI, Info, Tag
 from flask_cors import CORS
 from flask import redirect
 from models import Turma, Matricula

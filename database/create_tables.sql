@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS "matricula" (
   "id_matricula" uuid PRIMARY KEY DEFAULT gen_random_uuid (),
   "id_aluno" varchar(11),
   "id_turma" integer,
-  "data_matricula" date,
+  "data_matricula" date DEFAULT CURRENT_DATE,
   FOREIGN KEY ("id_aluno") REFERENCES "alunos" ("cpf"),
   FOREIGN KEY ("id_turma") REFERENCES "turma" ("id_turma"),
   UNIQUE ("id_aluno", "id_turma")

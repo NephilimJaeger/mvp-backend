@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
+from database.carga_inicial import db_carga_inicial
 from utils.config import Config
 
 pg_conn_string = Config.SQLALCHEMY_DATABASE_URI
@@ -29,7 +30,6 @@ def connect_to_db(engine):
 
 engine = create_db_engine(pg_conn_string)
 db_init(engine)
-
 
 connection = connect_to_db(engine)
 Session = sessionmaker(bind=engine)
