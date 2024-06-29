@@ -25,6 +25,3 @@ class Turma(Base):
         self.nivel = nivel
         self.horario = horario
         self.dia_semana = dia_semana
-
-    def __repr__(self):
-        return f"<Turma {self.id_turma}>"

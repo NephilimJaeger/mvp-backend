@@ -13,3 +13,12 @@ INSERT INTO turma (id_professor, nivel, horario, dia_semana) VALUES ('1234567890
 INSERT INTO turma (id_professor, nivel, horario, dia_semana) VALUES ('12345678901', 'básico', '20:00:00', 'terça-feira');
 INSERT INTO turma (id_professor, nivel, horario, dia_semana) VALUES ('36457123902', 'intermediário', '21:00:00', 'terça-feira');
 
+-- Inserindo dados na tabela de alunos
+
+INSERT INTO alunos (nome, cpf, telefone, endereco, data_nascimento, email) VALUES ('Amanda Julia Barbosa', '01737421014', '17984526514', 'Rua das Camélias, 213 - Jardins','2000-02-21','amanda.julia@gmail.com')
+
+-- Inserindo dados na tabela de matriculas
+
+INSERT INTO matricula (id_aluno, id_turma) VALUES ('01737421014', '3');
+INSERT INTO matricula (id_aluno, id_turma) VALUES ('01737421014', '6');
+

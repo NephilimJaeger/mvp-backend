@@ -2,9 +2,14 @@ from pydantic import BaseModel, Field
 from models import Turma, Professor
 from sqlalchemy.orm.session import Session
 from datetime import time
+from schemas.aluno import AlunoBase
 
 
 class TurmaDisplay(BaseModel):
+    """
+    Modelo de exibição para informações detalhadas de uma turma ao usuário.
+    """
+
     id_turma: int = Field(..., description="Identificador da turma")
     horario: str = Field(..., description="Horário da turma")
     professor: str = Field(..., description="Nome do professor")
@@ -13,6 +18,15 @@ class TurmaDisplay(BaseModel):
 
 
 def mostra_turmas(lista_turmas: list[Turma], session: Session):
+    """
+    Consulta e retorna informações detalhadas de todas as turmas listadas.
+
+    Recebe uma lista de objetos Turma e uma sessão de banco de dados. Para cada turma na lista, consulta o banco de dados para encontrar informações sobre o professor responsável. Em seguida, compila e retorna uma lista de dicionários contendo informações detalhadas sobre cada turma.
+
+    :param lista_turmas: Lista de objetos Turma para os quais as informações detalhadas serão retornadas.
+    :param session: Sessão do banco de dados utilizada para realizar as consultas.
+    :return: Dicionário contendo uma lista de turmas com suas informações detalhadas.
+    """
     turmas = []
     for turma in lista_turmas:
         professor = (
