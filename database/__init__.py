@@ -30,6 +30,7 @@ def connect_to_db(engine):
 engine = create_db_engine(pg_conn_string)
 db_init(engine)
 
+
 connection = connect_to_db(engine)
 Session = sessionmaker(bind=engine)
 session = Session()

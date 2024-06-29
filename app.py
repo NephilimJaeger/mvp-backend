@@ -30,9 +30,9 @@ def home():
 )
 def get_turmas():
     """
-    Endpoint para obter uma lista de todas as turmas disponíveis.
+    Consulta o banco de dados para obter todas as turmas cadastradas e as retorna ao usuário
 
-    Consulta o banco de dados para obter todas as turmas cadastradas e as retorna ao usuário.
+    Obtém a lista de todas as turmas disponíveis.
 
     :return: Lista de turmas disponíveis ou mensagem de erro em caso de falha na consulta.
     """
@@ -77,7 +77,7 @@ def matricular_aluno(form: MatriculaBase):
     """
     Endpoint para matricular um aluno em uma turma.
 
-    Recebe os dados para realizar o cadastro do aluno no sistema e realiza a matrícula do na turma especificada.
+    Recebe os dados para realizar o cadastro do aluno no sistema e realiza a matrícula do aluno na turma especificada.
 
     :param form: Objeto MatriculaBase contendo os dados necessários para a matrícula do aluno.
     :return: Dados da matrícula realizada ou mensagem de erro em caso de falha na matrícula.

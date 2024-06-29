@@ -7,7 +7,7 @@ from models import Aluno, Matricula
 class AlunoBase(BaseModel):
     """
     Define os dados necessários para cadastrar um aluno.
-    
+
     """
 
     pessoa_info: PessoaBase
