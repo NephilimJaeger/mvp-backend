@@ -8,7 +8,7 @@ Aplicação para consultar turmas disponíveis em uma escola de beach tennis e c
 ### Pre-requisitos
 
 - python 3.11
-- poetry
+- poetry ou venv
 - Postgres
 
 Esse projeto usa poetry para um melhor gerenciamento das dependências e o banco de dados Postgres:
@@ -17,17 +17,37 @@ Esse projeto usa poetry para um melhor gerenciamento das dependências e o banco
 
 ### Instalação
 
-Para inicializar um ambiente virtual `venv` no diretório e instalar as dependencias:
+Primeiro, clone e abra o repositório:
+
+```
+git clone https://github.com/NephilimJaeger/mvp-backend.git
+cd mvp-backend
+```
+Em seguida, instale as depências em um ambiente virtual:
+
+**Usando Poetry**
+
+Se você não estiver em um ambiente virtual, o poetry cria um automaticamente
 
 ```
 poetry install
 ```
 
-Se não quiser usar o poetry:
+**Sem usar Poetry**
+
+Mac/Linux
 
 ```
+python3 -m venv venv
+source venv/bin/activate 
 pip install -r requirements.txt
+```
 
+Windows
+```
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
 ### Carga Inicial dos dados
