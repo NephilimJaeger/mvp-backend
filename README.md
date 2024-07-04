@@ -25,7 +25,7 @@ cd mvp-backend
 ```
 Em seguida, instale as depências em um ambiente virtual:
 
-**Usando Poetry**
+#### Usando Poetry
 
 Se você não estiver em um ambiente virtual, o poetry cria um automaticamente
 
@@ -33,7 +33,7 @@ Se você não estiver em um ambiente virtual, o poetry cria um automaticamente
 poetry install
 ```
 
-**Sem usar Poetry**
+#### Sem usar Poetry
 
 Mac/Linux
 
