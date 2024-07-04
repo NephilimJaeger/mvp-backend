@@ -22,7 +22,6 @@ Primeiro, clone e abra o repositório:
 ```
 git clone https://github.com/NephilimJaeger/mvp-backend.git
 cd mvp-backend
-
 ```
 Em seguida, instale as depências em um ambiente virtual:
 
@@ -49,7 +48,6 @@ Windows
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
-
 ```
 
 ### Carga Inicial dos dados
