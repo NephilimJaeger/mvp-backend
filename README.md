@@ -35,6 +35,7 @@ poetry install
 ```
 
 **Sem usar Poetry**
+
 Mac/Linux
 
 ```
