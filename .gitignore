@@ -16,5 +16,5 @@ poetry.lock
 
 venv/
 .env
-
+.mypy_cache/
 
