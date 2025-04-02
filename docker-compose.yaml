@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PW=${POSTGRES_PW:-postgres}
+      - POSTGRES_URL=db:5432/beach_tennis_db
+    depends_on:
+      - db
+    restart: always
+    command: >
+      bash -c "python carrega_db.py && python app.py"
+
+  db:
+    image: postgres:14-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PW:-postgres}
+      - POSTGRES_DB=beach_tennis_db
+    ports:
+      - "5432:5432"
+    restart: always
+
+volumes:
+  postgres_data:
