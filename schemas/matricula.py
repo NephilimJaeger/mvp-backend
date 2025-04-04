@@ -65,7 +65,7 @@ def matricula_aluno(dados_matricula: Matricula, session: Session):
     session.add(matricula)
     session.commit()
     endereco_formatado = (
-        f"{endereco.get('logradouro', '')}, {numero}-"
+        f"{endereco.get('logradouro', '')}, {numero} - "
         f"{endereco.get('bairro', '')}, "
         f"{endereco.get('localidade', '')}-{endereco.get('uf', '')}"
     )

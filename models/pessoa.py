@@ -63,6 +63,6 @@ class Pessoa(Base):
 
         endereco_data = busca_endereco(pessoa_info.cep)
         if endereco_data:
-            self.endereco = f"{endereco_data.get('logradouro')},{self.numero}-{endereco_data.get('bairro')}, {endereco_data.get('localidade')}-{endereco_data.get('uf')}"
+            self.endereco = f"{endereco_data.get('logradouro')},{self.numero} - {endereco_data.get('bairro')}, {endereco_data.get('localidade')}-{endereco_data.get('uf')}"
         else:
             self.endereco = pessoa_info.complemento
