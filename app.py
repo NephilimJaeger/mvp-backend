@@ -1,7 +1,7 @@
 from flask_openapi3 import OpenAPI, Info, Tag
 from flask_cors import CORS
 from flask import redirect
-from models import Turma, Matricula, busca_endereco
+from models import Turma, Matricula
 from database import session
 from schemas import *
 
