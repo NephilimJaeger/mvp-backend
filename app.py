@@ -1,7 +1,7 @@
 from flask_openapi3 import OpenAPI, Info, Tag
 from flask_cors import CORS
 from flask import redirect
-from models import Turma, Matricula
+from models import Turma, Matricula, busca_endereco
 from database import session
 from schemas import *
 
@@ -15,6 +15,7 @@ home_tag = Tag(
 )
 aluno_tag = Tag(name="Alunos", description="Cadastro e visualização de alunos")
 turma_tag = Tag(name="Turmas", description="Visualização das turmas disponíveis")
+endereco_tag = Tag(name="Endereços", description="Consulta de endereço via CEP")
 
 
 @app.get("/", tags=[home_tag])
@@ -88,6 +89,27 @@ def matricular_aluno(form: MatriculaBase):
     except Exception as e:
         session.rollback()
         return {"erro": f"Erro ao matricular aluno: {e}"}, 400
+
+@app.get(
+    "/endereco",
+    tags=[endereco_tag],
+    responses={"200": EnderecoResponse, "400": ErrorSchema},
+)
+def get_endereco(query: EnderecoQuery):
+    """
+    Endpoint para buscar endereço a partir do CEP.
+    Utiliza a API ViaCEP para obter os dados do endereço.
+
+    :param query: Objeto contendo o CEP a ser consultado.
+    :return: Dados do endereço ou mensagem de erro.
+    """
+    try:
+        endereco = busca_endereco(query.cep)
+        if not endereco:
+            return {"erro": "CEP não encontrado ou invalido"}, 404
+        return endereco, 200
+    except Exception as e:
+        return {"erro": f"Erro ao buscar endereço: {e}"}, 400
 
 
 if __name__ == "__main__":
