@@ -19,10 +19,11 @@ Aplicação para consultar turmas disponíveis em uma escola de beach tennis e c
 - Postgres
 
 Esse projeto usa Docker para facilitar a configuração, mas também suporta instalação manual via Poetry ou venv. Se você optar pela instalação manual, precisa instalar uma instância do Postgres:
-`Docker`: https://docs.docker.com/get-docker/
-`Docker Compose`: https://docs.docker.com/compose/install/
-`Poetry`: https://python-poetry.org/docs/
-`Postgres`: https://www.postgresql.org/download/ or run a docker image of Postgres: https://hub.docker.com/_/postgres
+
+- `Docker`: https://docs.docker.com/get-docker/
+- `Docker Compose`: https://docs.docker.com/compose/install/
+- `Poetry`: https://python-poetry.org/docs/
+- `Postgres`: https://www.postgresql.org/download/ or run a docker image of Postgres: https://hub.docker.com/_/postgres
 
 ### Instalação
 
