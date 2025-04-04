@@ -54,6 +54,7 @@ def matricula_aluno(dados_matricula: Matricula, session: Session):
         raise ValueError(f"Turma {dados_matricula.id_turma} não existe")
     cep = dados_matricula.dados_aluno.pessoa_info.cep
     endereco = busca_endereco(cep)
+    numero = dados_matricula.dados_aluno.pessoa_info.numero
     if not endereco:
         raise ValueError(f"CEP {cep} não encontrado ou inválido")
     cadastra_aluno(dados_matricula.dados_aluno, session)
@@ -64,7 +65,7 @@ def matricula_aluno(dados_matricula: Matricula, session: Session):
     session.add(matricula)
     session.commit()
     endereco_formatado = (
-        f"{endereco.get('logradouro', '')}, "
+        f"{endereco.get('logradouro', '')}, {numero}-"
         f"{endereco.get('bairro', '')}, "
         f"{endereco.get('localidade', '')}-{endereco.get('uf', '')}"
     )

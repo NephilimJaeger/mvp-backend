@@ -11,5 +11,6 @@ class PessoaBase(BaseModel):
     cpf: str
     telefone: str
     cep: str
+    numero: str
     email: str
     data_nascimento: str

@@ -12,7 +12,7 @@ class PessoaInfo:
     cpf: str
     telefone: str
     cep: str
-    complemento: str
+    numero: str
     email: str
     data_nascimento: date
 
@@ -59,9 +59,10 @@ class Pessoa(Base):
         self.telefone = pessoa_info.telefone
         self.email = pessoa_info.email
         self.data_nascimento = pessoa_info.data_nascimento
+        self.numero = pessoa_info.numero
 
         endereco_data = busca_endereco(pessoa_info.cep)
         if endereco_data:
-            self.endereco = f"{endereco_data.get('logradouro')}, {endereco_data.get('bairro')}, {endereco_data.get('localidade')}, {endereco_data.get('uf')}"
+            self.endereco = f"{endereco_data.get('logradouro')},{self.numero}-{endereco_data.get('bairro')}, {endereco_data.get('localidade')}-{endereco_data.get('uf')}"
         else:
             self.endereco = pessoa_info.complemento
