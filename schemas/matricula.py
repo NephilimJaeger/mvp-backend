@@ -45,7 +45,7 @@ def matricula_aluno(dados_matricula: Matricula, session: Session):
     """
     if not verifica_existencia_turma(dados_matricula.id_turma, session):
         raise ValueError(f"Turma {dados_matricula.id_turma} não existe")
-    cadastro = cadastra_aluno(dados_matricula.dados_aluno, session)
+    cadastra_aluno(dados_matricula.dados_aluno, session)
     matricula = Matricula(
         id_aluno=dados_matricula.dados_aluno.pessoa_info.cpf,
         id_turma=dados_matricula.id_turma,

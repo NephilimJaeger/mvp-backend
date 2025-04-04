@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from schemas.pessoa import PessoaBase
 from sqlalchemy.orm.session import Session
-from models import Aluno, Matricula
+from models import Aluno
 
 
 class AlunoBase(BaseModel):
