@@ -4,12 +4,17 @@ from models import busca_endereco
 
 class EnderecoQuery(BaseModel):
     """Define parâmetros para busca de endereço por CEP."""
-    cep: str = Field(...,
-                     description="CEP do endereço para busca (somento números)",
-                     example="12345678")
+
+    cep: str = Field(
+        ...,
+        description="CEP do endereço para busca (somento números)",
+        example="12345678",
+    )
+
 
 class EnderecoResponse(BaseModel):
     """Define a resposta da consulta de endereço."""
+
     cep: str = Field(None, description="CEP formatado")
     logradouro: str = Field(None, description="Nome da rua/avenida/etc")
     complemento: str = Field(None, description="Complemento do endereço")

@@ -16,6 +16,7 @@ class PessoaInfo:
     email: str
     data_nascimento: date
 
+
 def busca_endereco(cep: str) -> dict:
     """
     Consulta a API ViaCEP para obter o endereço a partir do CEP.
@@ -26,7 +27,7 @@ def busca_endereco(cep: str) -> dict:
     Returns:
         dict: Dicionário com os dados do endereço ou vazio se houver erro
     """
-    cep = ''.join(filter(str.isdigit, cep))
+    cep = "".join(filter(str.isdigit, cep))
 
     if len(cep) != 8:
         raise ValueError("CEP deve conter 8 dígitos")
@@ -42,6 +43,7 @@ def busca_endereco(cep: str) -> dict:
     except Exception:
         return {}
 
+
 class Pessoa(Base):
     __abstract__ = True
     nome = Column(String)
@@ -50,15 +52,6 @@ class Pessoa(Base):
     endereco = Column(String)
     email = Column(String)
     data_nascimento = Column(Date)
-
-    __annotations__ = {
-        'nome': str,
-        'cpf': str,
-        'telefone': str,
-        'endereco': str,
-        'email': str,
-        'data_nascimento': date
-    }
 
     def __init__(self, pessoa_info: PessoaInfo):
         self.nome = pessoa_info.nome

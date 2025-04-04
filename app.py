@@ -90,6 +90,7 @@ def matricular_aluno(form: MatriculaBase):
         session.rollback()
         return {"erro": f"Erro ao matricular aluno: {e}"}, 400
 
+
 @app.get(
     "/endereco",
     tags=[endereco_tag],
