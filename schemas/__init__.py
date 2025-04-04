@@ -1,6 +1,6 @@
 from schemas.turma import TurmaDisplay, mostra_turmas
 from schemas.aluno import AlunoBase, AlunoPath, cadastra_aluno
-from schemas.matricula import MatriculaBase, matricula_aluno
+from schemas.matricula import MatriculaBase, matricula_aluno, MatriculaResponse
 from schemas.error import ErrorSchema
 from schemas.professor import ProfessorBase
 from schemas.endereco import EnderecoQuery, EnderecoResponse

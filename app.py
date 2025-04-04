@@ -72,7 +72,7 @@ def get_turmas_por_cpf(path: AlunoPath):
 @app.post(
     "/matricula",
     tags=[aluno_tag],
-    responses={"200": MatriculaBase, "400": ErrorSchema},
+    responses={"200": MatriculaResponse, "400": ErrorSchema},
 )
 def matricular_aluno(form: MatriculaBase):
     """
@@ -86,31 +86,17 @@ def matricular_aluno(form: MatriculaBase):
     try:
         matricula = matricula_aluno(form, session)
         return matricula, 200
+    except ValueError as e:
+        session.rollback()
+        if "CEP" in str(e):
+            return {"erro": str(e)}, 400
+        elif "Turma" in str(e):
+            return {"erro": str(e)}, 404
+        else:
+            return {"erro": str(e)}, 400
     except Exception as e:
         session.rollback()
         return {"erro": f"Erro ao matricular aluno: {e}"}, 400
-
-
-@app.get(
-    "/endereco",
-    tags=[endereco_tag],
-    responses={"200": EnderecoResponse, "400": ErrorSchema},
-)
-def get_endereco(query: EnderecoQuery):
-    """
-    Endpoint para buscar endereço a partir do CEP.
-    Utiliza a API ViaCEP para obter os dados do endereço.
-
-    :param query: Objeto contendo o CEP a ser consultado.
-    :return: Dados do endereço ou mensagem de erro.
-    """
-    try:
-        endereco = busca_endereco(query.cep)
-        if not endereco:
-            return {"erro": "CEP não encontrado ou invalido"}, 404
-        return endereco, 200
-    except Exception as e:
-        return {"erro": f"Erro ao buscar endereço: {e}"}, 400
 
 
 if __name__ == "__main__":

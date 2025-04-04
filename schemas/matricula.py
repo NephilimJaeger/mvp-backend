@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from models import Matricula, Turma
+from models import Matricula, Turma, busca_endereco
 from sqlalchemy.orm.session import Session
 from schemas import AlunoBase, cadastra_aluno
 from datetime import date
@@ -15,6 +15,13 @@ class MatriculaBase(BaseModel):
     id_turma: int
     data_matricula: date = Field(date.today(), description="Data da inscrição")
 
+class MatriculaResponse(BaseModel):
+    """
+    Define a resposta da operação de matrícula.
+
+    """
+    mensagem: str = Field(..., description="Mensagem de confirmação da matrícula")
+    endereco_formatado: str = Field(..., description="Endereço formatado para exibição")
 
 def verifica_existencia_turma(id_turma: int, session: Session) -> bool:
     """
@@ -45,6 +52,10 @@ def matricula_aluno(dados_matricula: Matricula, session: Session):
     """
     if not verifica_existencia_turma(dados_matricula.id_turma, session):
         raise ValueError(f"Turma {dados_matricula.id_turma} não existe")
+    cep = dados_matricula.dados_aluno.pessoa_info.cep
+    endereco = busca_endereco(cep)
+    if not endereco:
+        raise ValueError(f"CEP {cep} não encontrado ou inválido")
     cadastra_aluno(dados_matricula.dados_aluno, session)
     matricula = Matricula(
         id_aluno=dados_matricula.dados_aluno.pessoa_info.cpf,
@@ -52,6 +63,12 @@ def matricula_aluno(dados_matricula: Matricula, session: Session):
     )
     session.add(matricula)
     session.commit()
+    endereco_formatado = (
+        f"{endereco.get('logradouro', '')}, "
+        f"{endereco.get('bairro', '')}, "
+        f"{endereco.get('localidade', '')}-{endereco.get('uf', '')}"
+    )
     return {
-        "mensagem": f"Aluno {dados_matricula.dados_aluno.pessoa_info.nome} matriculado na turma {dados_matricula.id_turma} com sucesso"
+        "mensagem": f"Aluno {dados_matricula.dados_aluno.pessoa_info.nome} matriculado na turma {dados_matricula.id_turma} com sucesso",
+        "endereco": endereco_formatado,
     }

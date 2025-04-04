@@ -10,6 +10,6 @@ class PessoaBase(BaseModel):
     nome: str
     cpf: str
     telefone: str
-    endereco: str
+    cep: str
     email: str
     data_nascimento: str
