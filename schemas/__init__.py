@@ -10,7 +10,8 @@ from schemas.matricula import (
     MatriculaBase,
     matricula_aluno,
     cancela_matricula,
-    MatriculaPath,
+    CancelarMatriculaPath,
+    MatriculaCanceladaDisplay,
 )
 from schemas.error import ErrorSchema
 from schemas.professor import ProfessorBase

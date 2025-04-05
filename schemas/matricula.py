@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from models import Matricula, Turma
 from sqlalchemy.orm.session import Session
-from schemas import AlunoBase, cadastra_aluno
+from schemas import AlunoBase, cadastra_aluno, AlunoPath, TurmaPath
 from datetime import date
 
 
@@ -15,15 +15,18 @@ class MatriculaBase(BaseModel):
     id_turma: int
     data_matricula: date = Field(date.today(), description="Data da inscrição")
 
-
-class MatriculaPath(BaseModel):
-    """
-    Modelo para identificação de uma matrícula.
-
-    """
-
+class CancelarMatriculaPath(BaseModel):
     cpf_aluno: str = Field(..., description="CPF do aluno")
     id_turma: int = Field(..., description="ID da turma")
+
+class MatriculaCanceladaDisplay(BaseModel):
+    """
+    Modelo de exibição para informações detalhadas de uma matrícula cancelada.
+    """
+
+    id_aluno: str = Field(..., description="Identificador do aluno")
+    id_turma: int = Field(..., description="Identificador da turma")
+    data_cancelamento: date = Field(..., description="Data do cancelamento")
 
 
 def verifica_existencia_turma(id_turma: int, session: Session) -> bool:
@@ -42,7 +45,7 @@ def verifica_existencia_turma(id_turma: int, session: Session) -> bool:
     return turma_existente is not None
 
 
-def matricula_aluno(dados_matricula: Matricula, session: Session):
+def matricula_aluno(dados_matricula: Matricula, session: Session) -> dict:
     """
     Realiza a matrícula de um aluno em uma turma, verificando primeiro se a turma existe.
 
@@ -67,7 +70,7 @@ def matricula_aluno(dados_matricula: Matricula, session: Session):
     }
 
 
-def cancela_matricula(id_aluno: str, id_turma: int, session: Session):
+def cancela_matricula(cpf_aluno: str, id_turma: int, session: Session):
     """
     Cancela a matrícula do aluno.
 
@@ -81,14 +84,14 @@ def cancela_matricula(id_aluno: str, id_turma: int, session: Session):
     """
     matricula = (
         session.query(Matricula)
-        .filter(Matricula.id_aluno == id_aluno, Matricula.id_turma == id_turma)
+        .filter(Matricula.id_aluno == cpf_aluno, Matricula.id_turma == id_turma)
         .first()
     )
     if matricula:
         session.delete(matricula)
         session.commit()
         return {
-            "mensagem": f"Matricula do aluno {id_aluno} na turma {id_turma} cancelada com sucesso"
+            "mensagem": f"Matricula do aluno {cpf_aluno} na turma {id_turma} cancelada com sucesso"
         }
     else:
         return {"erro": "Matricula não encontrada"}
