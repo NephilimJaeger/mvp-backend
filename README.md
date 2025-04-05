@@ -1,7 +1,7 @@
 # PUC-Rio MVP Backend
 ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
-Aplicação para consultar turmas disponíveis em uma escola de beach tennis e cadastras alunos.
+Microserviço para gerenciar matriculas de uma escola de beach tennis.
 
 # Iniciando
 
