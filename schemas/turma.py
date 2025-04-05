@@ -16,6 +16,19 @@ class TurmaDisplay(BaseModel):
     nivel: str = Field(..., description="Nível da turma")
     dia_semana: str = Field(..., description="Dia da semana em que a aula ocorre")
 
+class TurmaUpdate(BaseModel):
+    """
+    Modelo para atualização dos dados de uma turma.
+    """
+    horario: str = Field(..., description="Horário da turma")
+    nivel: str = Field(..., description="Nível da turma")
+    dia_semana: str = Field(..., description="Dia da semana em que a aula ocorre")
+
+class TurmaPath(BaseModel):
+    """
+    Modelo para identificação de uma turma.
+    """
+    id_turma: int = Field(..., description="ID da turma")
 
 def mostra_turmas(lista_turmas: list[Turma], session: Session):
     """
@@ -45,7 +58,7 @@ def mostra_turmas(lista_turmas: list[Turma], session: Session):
     return {"turmas": turmas}
 
 
-def atualiza_turma(id_turma: int, dados_turma: TurmaDisplay, session: Session):
+def atualiza_turma(id_turma: int, dados_turma: TurmaUpdate, session: Session):
     """
     Atualiza os dados de uma turma existente no banco de dados.
 

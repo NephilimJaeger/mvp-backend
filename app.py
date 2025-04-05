@@ -118,16 +118,17 @@ def cancelar_matricula(path: AlunoPath):
     tags=[turma_tag],
     responses={"200": TurmaDisplay, "400": ErrorSchema},
 )
-def atualizar_turma(path: TurmaDisplay):
+def atualizar_turma(path: TurmaPath, form: TurmaUpdate):
     """
     Endpoint para atualizar os dados de uma turma.
 
-    :param path: Objeto TurmaDisplay contendo os novos dados da turma.
+    :param path: Objeto TurmaPath contendo o ID da turma.
+    :param form: Objeto TurmaUpdate contendo os novos dados da turma.
     :return: Mensagem de sucesso ou erro ao atualizar a turma.
     """
     try:
-        atualiza_turma(path.id_turma, path, session)
-        return {"mensagem": "Turma atualizada com sucesso"}, 200
+        resultado = atualiza_turma(path.id_turma, form, session)
+        return resultado[0], resultado[1]
     except Exception as e:
         session.rollback()
         return {"erro": f"Erro ao atualizar turma: {e}"}, 400
