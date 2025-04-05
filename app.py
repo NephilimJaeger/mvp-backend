@@ -110,5 +110,24 @@ def cancelar_matricula(path: AlunoPath):
         session.rollback()
         return {"erro": f"Erro ao cancelar matrícula: {e}"}, 400
 
+@app.put(
+    "/turmas/<id_turma>",
+    tags=[turma_tag],
+    responses={"200": TurmaDisplay, "400": ErrorSchema},
+)
+def atualizar_turma(path: TurmaDisplay):
+    """
+    Endpoint para atualizar os dados de uma turma.
+
+    :param path: Objeto TurmaDisplay contendo os novos dados da turma.
+    :return: Mensagem de sucesso ou erro ao atualizar a turma.
+    """
+    try:
+        atualiza_turma(path.id_turma, path, session)
+        return {"mensagem": "Turma atualizada com sucesso"}, 200
+    except Exception as e:
+        session.rollback()
+        return {"erro": f"Erro ao atualizar turma: {e}"}, 400
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)

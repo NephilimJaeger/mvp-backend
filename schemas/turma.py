@@ -43,3 +43,22 @@ def mostra_turmas(lista_turmas: list[Turma], session: Session):
             }
         )
     return {"turmas": turmas}
+
+def atualiza_turma(id_turma: int, dados_turma: TurmaDisplay, session: Session):
+    """
+    Atualiza os dados de uma turma existente no banco de dados.
+
+    :param id_turma: ID da turma a ser atualizada.
+    :param dados_turma: Objeto TurmaDisplay contendo os novos dados da turma.
+    :param session: Sessão do banco de dados utilizada para realizar a atualização.
+    :return: Mensagem de sucesso ou erro.
+    """
+    turma = session.query(Turma).filter(Turma.id_turma == id_turma).first()
+    if not turma:
+        return {"erro": "Turma não encontrada"}, 404
+
+    turma.horario = time.fromisoformat(dados_turma.horario)
+    turma.nivel = dados_turma.nivel
+    turma.dia_semana = dados_turma.dia_semana
+    session.commit()
+    return {"mensagem": "Turma atualizada com sucesso"}, 200
