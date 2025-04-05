@@ -16,6 +16,16 @@ class MatriculaBase(BaseModel):
     data_matricula: date = Field(date.today(), description="Data da inscrição")
 
 
+class MatriculaPath(BaseModel):
+    """
+    Modelo para identificação de uma matrícula.
+
+    """
+
+    cpf_aluno: str = Field(..., description="CPF do aluno")
+    id_turma: int = Field(..., description="ID da turma")
+
+
 def verifica_existencia_turma(id_turma: int, session: Session) -> bool:
     """
     Verifica se uma turma com o id_turma especificado existe no banco de dados.
@@ -55,3 +65,30 @@ def matricula_aluno(dados_matricula: Matricula, session: Session):
     return {
         "mensagem": f"Aluno {dados_matricula.dados_aluno.pessoa_info.nome} matriculado na turma {dados_matricula.id_turma} com sucesso",
     }
+
+
+def cancela_matricula(id_aluno: str, id_turma: int, session: Session):
+    """
+    Cancela a matrícula do aluno.
+
+    Parâmetros:
+    - id_aluno (str): CPF do aluno cuja matrícula deve ser cancelada.
+    - id_turma (int): ID da turma onde o aluno está matriculado.
+    - session (Session): Sessão do SQLAlchemy para realizar operações no banco de dados.
+
+    Retorna:
+    - dict: Mensagem de sucesso ou erro.
+    """
+    matricula = (
+        session.query(Matricula)
+        .filter(Matricula.id_aluno == id_aluno, Matricula.id_turma == id_turma)
+        .first()
+    )
+    if matricula:
+        session.delete(matricula)
+        session.commit()
+        return {
+            "mensagem": f"Matricula do aluno {id_aluno} na turma {id_turma} cancelada com sucesso"
+        }
+    else:
+        return {"erro": "Matricula não encontrada"}

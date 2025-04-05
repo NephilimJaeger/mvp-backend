@@ -4,6 +4,7 @@ from sqlalchemy import Column
 from sqlalchemy.sql.sqltypes import String, Date
 from datetime import date
 
+
 @dataclass
 class PessoaInfo:
     nome: str
@@ -42,4 +43,6 @@ class Pessoa(Base):
         self.uf = pessoa_info.uf
         self.cep = pessoa_info.cep
 
-        self.endereco = f"{self.logradouro},{self.numero} - {self.bairro}, {self.cidade}-{self.uf}"
+        self.endereco = (
+            f"{self.logradouro},{self.numero} - {self.bairro}, {self.cidade}-{self.uf}"
+        )

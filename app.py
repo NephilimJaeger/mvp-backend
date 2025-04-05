@@ -91,6 +91,24 @@ def matricular_aluno(form: MatriculaBase):
         session.rollback()
         return {"erro": f"Erro ao matricular aluno: {e}"}, 400
 
+@app.delete(
+    "/matricula/<cpf_aluno>/<id_turma>",
+    tags=[aluno_tag],
+    responses={"200": MatriculaBase, "400": ErrorSchema},
+)
+def cancelar_matricula(path: AlunoPath):
+    """
+    Endpoint para cancelar a matrícula de um aluno em uma turma.
+
+    :param path: Objeto AlunoPath contendo o CPF do aluno e o ID da turma.
+    :return: Mensagem de sucesso ou erro ao cancelar a matrícula.
+    """
+    try:
+        cancela_matricula(path.cpf_aluno, path.id_turma, session)
+        return {"mensagem": "Matrícula cancelada com sucesso"}, 200
+    except Exception as e:
+        session.rollback()
+        return {"erro": f"Erro ao cancelar matrícula: {e}"}, 400
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
