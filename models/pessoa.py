@@ -3,8 +3,6 @@ from dataclasses import dataclass
 from sqlalchemy import Column
 from sqlalchemy.sql.sqltypes import String, Date
 from datetime import date
-import requests
-
 
 @dataclass
 class PessoaInfo:
@@ -12,36 +10,15 @@ class PessoaInfo:
     cpf: str
     telefone: str
     cep: str
+    logradouro: str
     numero: str
+    bairro: str
+    cidade: str
+    uf: str
     email: str
     data_nascimento: date
 
 
-def busca_endereco(cep: str) -> dict:
-    """
-    Consulta a API ViaCEP para obter o endereço a partir do CEP.
-
-    Args:
-        cep (str): CEP a ser consultado (apenas números)
-
-    Returns:
-        dict: Dicionário com os dados do endereço ou vazio se houver erro
-    """
-    cep = "".join(filter(str.isdigit, cep))
-
-    if len(cep) != 8:
-        raise ValueError("CEP deve conter 8 dígitos")
-
-    url = f"https://viacep.com.br/ws/{cep}/json/"
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()
-            if "erro" not in data:
-                return data
-        return {}
-    except Exception:
-        return {}
 
 
 class Pessoa(Base):
@@ -60,9 +37,9 @@ class Pessoa(Base):
         self.email = pessoa_info.email
         self.data_nascimento = pessoa_info.data_nascimento
         self.numero = pessoa_info.numero
+        self.logradouro = pessoa_info.logradouro
+        self.bairro = pessoa_info.bairro
+        self.cidade = pessoa_info.cidade
+        self.uf = pessoa_info.uf
 
-        endereco_data = busca_endereco(pessoa_info.cep)
-        if endereco_data:
-            self.endereco = f"{endereco_data.get('logradouro')},{self.numero} - {endereco_data.get('bairro')}, {endereco_data.get('localidade')}-{endereco_data.get('uf')}"
-        else:
-            self.endereco = pessoa_info.complemento
+        self.endereco = f"{self.logradouro},{self.numero} - {self.bairro}, {self.cidade}-{self.uf}"
