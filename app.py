@@ -100,7 +100,7 @@ def matricular_aluno(form: MatriculaBase):
 )
 def cancelar_matricula(path: AlunoPath, id_turma: int):
     """
-    Endpoint para cancelar a matrícula de um aluno em uma turma.
+    Endpoint para cancelar a matrícula de um aluno
 
     :param path: Objeto AlunoPath contendo o CPF do aluno e o ID da turma.
     :param id_turma: ID da turma a ser cancelada.
