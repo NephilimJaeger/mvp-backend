@@ -4,7 +4,7 @@ from schemas.turma import (
     atualiza_turma,
     TurmaUpdate,
     TurmaPath,
-    )
+)
 from schemas.aluno import AlunoBase, AlunoPath, cadastra_aluno
 from schemas.matricula import (
     MatriculaBase,

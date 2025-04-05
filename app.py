@@ -98,15 +98,16 @@ def matricular_aluno(form: MatriculaBase):
     tags=[aluno_tag],
     responses={"200": MatriculaBase, "400": ErrorSchema},
 )
-def cancelar_matricula(path: AlunoPath):
+def cancelar_matricula(path: AlunoPath, id_turma: int):
     """
     Endpoint para cancelar a matrícula de um aluno em uma turma.
 
     :param path: Objeto AlunoPath contendo o CPF do aluno e o ID da turma.
+    :param id_turma: ID da turma a ser cancelada.
     :return: Mensagem de sucesso ou erro ao cancelar a matrícula.
     """
     try:
-        cancela_matricula(path.cpf_aluno, path.id_turma, session)
+        cancela_matricula(path.cpf_aluno, id_turma, session)
         return {"mensagem": "Matrícula cancelada com sucesso"}, 200
     except Exception as e:
         session.rollback()
