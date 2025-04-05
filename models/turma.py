@@ -7,7 +7,7 @@ from models.base import Base
 class Turma(Base):
     __tablename__ = "turma"
     id_turma = Column(Integer, primary_key=True, autoincrement=True)
-    id_professor = Column(String, ForeignKey("professores.cpf"), nullable=False)
+    id_professor = Column(String, ForeignKey("professor.cpf"), nullable=False)
     nivel = Column(String)
     horario = Column(Time)
     dia_semana = Column(String)
