@@ -15,8 +15,6 @@ home_tag = Tag(
 )
 aluno_tag = Tag(name="Alunos", description="Cadastro e visualização de alunos")
 turma_tag = Tag(name="Turmas", description="Visualização das turmas disponíveis")
-endereco_tag = Tag(name="Endereços", description="Consulta de endereço via CEP")
-
 
 @app.get("/", tags=[home_tag])
 def home():
@@ -72,7 +70,7 @@ def get_turmas_por_cpf(path: AlunoPath):
 @app.post(
     "/matricula",
     tags=[aluno_tag],
-    responses={"200": MatriculaResponse, "400": ErrorSchema},
+    responses={"200": MatriculaBase, "400": ErrorSchema},
 )
 def matricular_aluno(form: MatriculaBase):
     """
@@ -88,12 +86,7 @@ def matricular_aluno(form: MatriculaBase):
         return matricula, 200
     except ValueError as e:
         session.rollback()
-        if "CEP" in str(e):
-            return {"erro": str(e)}, 400
-        elif "Turma" in str(e):
-            return {"erro": str(e)}, 404
-        else:
-            return {"erro": str(e)}, 400
+        return {"erro": str(e)}, 404
     except Exception as e:
         session.rollback()
         return {"erro": f"Erro ao matricular aluno: {e}"}, 400
