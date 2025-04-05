@@ -19,8 +19,6 @@ class PessoaInfo:
     data_nascimento: date
 
 
-
-
 class Pessoa(Base):
     __abstract__ = True
     nome = Column(String)
@@ -29,6 +27,7 @@ class Pessoa(Base):
     endereco = Column(String)
     email = Column(String)
     data_nascimento = Column(Date)
+    cep = Column(String(8))
 
     def __init__(self, pessoa_info: PessoaInfo):
         self.nome = pessoa_info.nome
@@ -41,5 +40,6 @@ class Pessoa(Base):
         self.bairro = pessoa_info.bairro
         self.cidade = pessoa_info.cidade
         self.uf = pessoa_info.uf
+        self.cep = pessoa_info.cep
 
         self.endereco = f"{self.logradouro},{self.numero} - {self.bairro}, {self.cidade}-{self.uf}"

@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS "alunos" (
   "cpf"      varchar (11) PRIMARY KEY,
   "telefone" varchar (11),
   "endereco" varchar,
+  "cep"      varchar(8),
   "data_nascimento" date,
   "email"    varchar
 );
@@ -14,6 +15,7 @@ CREATE TABLE IF NOT EXISTS "professor" (
   "cpf" varchar(11) PRIMARY KEY,
   "telefone" varchar(11),
   "endereco" varchar,
+  "cep"      varchar(8),
   "email" varchar,
   "data_nascimento" date,
   "informacoes_adicionais" varchar(5000)
