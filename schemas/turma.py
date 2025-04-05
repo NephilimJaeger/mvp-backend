@@ -44,6 +44,7 @@ def mostra_turmas(lista_turmas: list[Turma], session: Session):
         )
     return {"turmas": turmas}
 
+
 def atualiza_turma(id_turma: int, dados_turma: TurmaDisplay, session: Session):
     """
     Atualiza os dados de uma turma existente no banco de dados.

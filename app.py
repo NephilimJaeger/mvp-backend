@@ -16,6 +16,7 @@ home_tag = Tag(
 aluno_tag = Tag(name="Alunos", description="Cadastro e visualização de alunos")
 turma_tag = Tag(name="Turmas", description="Visualização das turmas disponíveis")
 
+
 @app.get("/", tags=[home_tag])
 def home():
     """Redireciona para /openapi, tela que permite a escolha do estilo de documentação."""
@@ -91,6 +92,7 @@ def matricular_aluno(form: MatriculaBase):
         session.rollback()
         return {"erro": f"Erro ao matricular aluno: {e}"}, 400
 
+
 @app.delete(
     "/matricula/<cpf_aluno>/<id_turma>",
     tags=[aluno_tag],
@@ -110,6 +112,7 @@ def cancelar_matricula(path: AlunoPath):
         session.rollback()
         return {"erro": f"Erro ao cancelar matrícula: {e}"}, 400
 
+
 @app.put(
     "/turmas/<id_turma>",
     tags=[turma_tag],
@@ -128,6 +131,7 @@ def atualizar_turma(path: TurmaDisplay):
     except Exception as e:
         session.rollback()
         return {"erro": f"Erro ao atualizar turma: {e}"}, 400
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
